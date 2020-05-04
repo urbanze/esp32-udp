@@ -6,7 +6,7 @@ Attention: ESP32 will be listening port 19000 and send echo in port 5000.
 ```
 WF wifi;
 UDP udp;
-wifi.ap_start("wifi", "1234567890"); //Connect in WiFi
+wifi.ap_start("wifi", "1234567890"); //Create AP
 
 udp.begin(19000); //Listening port 19000
 while (1)
