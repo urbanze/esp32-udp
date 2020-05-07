@@ -1,5 +1,6 @@
 # ESP32 IDF UDP library
-All functions have comments and are inspired in the Arduino Core. WiFi Library used: [WiFi](https://github.com/urbanze/esp32-wifi)
+All functions have comments and are inspired in the Arduino Core. WiFi Library used: [WiFi](https://github.com/urbanze/esp32-wifi)\
+Removing some specific lines, this library can work in any system with BSD SOCKET support.
 
 # Simple example to listen and send echo
 Attention: ESP32 will be listening port 19000 and send echo in port 5000.
