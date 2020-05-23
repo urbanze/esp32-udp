@@ -4,15 +4,6 @@
 
 //===========UDP===========
 /**
- * @brief Close socket if object are destroyed
- */
-UDP::~UDP()
-{
-    close(sr);
-    close(ss);
-}
-
-/**
  * @brief Start UDP Server to listen packets in specific port.
  * 
  * Called only one time per port.
@@ -77,6 +68,15 @@ void UDP::beginPacket(const char *ip, uint16_t port)
 }
 
 /**
+ * @brief Close socket if object.
+ */
+void UDP::stop()
+{
+    close(sr);
+    close(ss);
+}
+
+/**
  * @brief Flush (erase) all data available in RX queue.
  */
 void UDP::flush()
@@ -129,12 +129,26 @@ uint16_t UDP::remotePort()
  */
 int16_t UDP::write(uint8_t *data, uint16_t size)
 {
-    if (sendto(ss, data, size, 0, (struct sockaddr*)&sas, sizeof(sas)) < 0)
+    if (sr)
     {
-        ESP_LOGE(tag, "Fail to send [%d]", errno);
-        close(ss);
-        return -1;
+        if (sendto(sr, data, size, 0, (struct sockaddr*)&sas, sizeof(sas)) < 0)
+        {
+            ESP_LOGE(tag, "Fail to send [%d]", errno);
+            close(sr);
+            return -1;
+        }
     }
+    else
+    {
+        if (sendto(ss, data, size, 0, (struct sockaddr*)&sas, sizeof(sas)) < 0)
+        {
+            ESP_LOGE(tag, "Fail to send [%d]", errno);
+            close(ss);
+            return -1;
+        }
+    }
+    
+    
 
     return size;
 }

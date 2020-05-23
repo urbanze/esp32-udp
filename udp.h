@@ -1,5 +1,5 @@
-#ifndef tcp_H
-#define tcp_H
+#ifndef udp_H
+#define udp_H
 
 #include <esp_err.h>
 #include <esp_log.h>
@@ -64,10 +64,9 @@ class UDP
 		socklen_t fromlen = sizeof(sar);
 
 	public:
-		~UDP();
-
 		void begin(uint16_t port);
 		void beginPacket(const char *ip, uint16_t port);
+		void stop();
 
 		void flush();
 		int16_t available();
