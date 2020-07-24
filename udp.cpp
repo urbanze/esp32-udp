@@ -191,8 +191,7 @@ uint8_t UDP::read()
  */
 void UDP::readBytes(uint8_t *bff, uint16_t size)
 {
-    //memset(bff, 0, sizeof(size));
-    recvfrom(sr, bff, size-1, MSG_DONTWAIT, (struct sockaddr*)&sar, &fromlen);
+    recvfrom(sr, bff, size, MSG_DONTWAIT, (struct sockaddr*)&sar, &fromlen);
 }
 
 /**
@@ -200,6 +199,5 @@ void UDP::readBytes(uint8_t *bff, uint16_t size)
  */
 void UDP::readBytes(char *bff, uint16_t size)
 {
-    //memset(bff, 0, sizeof(size));
-    recvfrom(sr, bff, size-1, MSG_DONTWAIT, (struct sockaddr*)&sar, &fromlen);
+    recvfrom(sr, bff, size, MSG_DONTWAIT, (struct sockaddr*)&sar, &fromlen);
 }
